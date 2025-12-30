@@ -1,0 +1,162 @@
+<!-- Sección de Contacto -->
+<section id="contactame" class="contact-section" data-aos="fade-up">
+    <div class="section-header">
+        <span class="section-tag"><i class="fas fa-paper-plane"></i> Conectemos</span>
+        <h2 class="section-title">¿Tienes un Proyecto en Mente?</h2>
+        <p class="section-description">Estoy disponible para nuevas oportunidades. ¡Hablemos!</p>
+    </div>
+    
+    <div class="contact-container">
+        <!-- Información de Contacto -->
+        <div class="contact-info" data-aos="fade-right">
+            <div class="contact-intro">
+                <h3>Trabajemos Juntos</h3>
+                <p>
+                    Ya sea que tengas una idea para un proyecto, necesites consultoría tecnológica 
+                    o simplemente quieras conectar, estaré encantado de escucharte.
+                </p>
+            </div>
+            
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <div class="method-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="method-details">
+                        <span class="method-label">Email</span>
+                        <a href="mailto:edwincamilovalencia@gmail.com" class="method-value">
+                            edwincamilovalencia@gmail.com
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="method-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="method-details">
+                        <span class="method-label">Teléfono</span>
+                        <a href="tel:+573105364042" class="method-value">
+                            +57 310 536 4042
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="method-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="method-details">
+                        <span class="method-label">WhatsApp</span>
+                        <a href="https://wa.me/573105364042" target="_blank" rel="noopener noreferrer" class="method-value">
+                            Enviar mensaje
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="method-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="method-details">
+                        <span class="method-label">Ubicación</span>
+                        <span class="method-value">Colombia 🇨🇴</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-social">
+                <h4>Sígueme en redes</h4>
+                <div class="social-links">
+                    <a href="https://github.com/Edwincamilovalencia" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/edwin-valencia-819b80250/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Formulario de Contacto -->
+        <div class="contact-form-container" data-aos="fade-left">
+            <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <label for="name">
+                        <i class="fas fa-user"></i>
+                        Nombre Completo
+                    </label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        required 
+                        placeholder="Tu nombre"
+                        autocomplete="name"
+                    >
+                    <span class="input-highlight"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i>
+                        Correo Electrónico
+                    </label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        required 
+                        placeholder="tu@email.com"
+                        autocomplete="email"
+                    >
+                    <span class="input-highlight"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">
+                        <i class="fas fa-tag"></i>
+                        Asunto
+                    </label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Selecciona un tema</option>
+                        <option value="proyecto">Tengo un proyecto</option>
+                        <option value="consultoria">Necesito consultoría</option>
+                        <option value="empleo">Oportunidad laboral</option>
+                        <option value="colaboracion">Colaboración</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                    <span class="input-highlight"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">
+                        <i class="fas fa-comment-alt"></i>
+                        Mensaje
+                    </label>
+                    <textarea 
+                        id="message" 
+                        name="message" 
+                        rows="5" 
+                        required 
+                        placeholder="Cuéntame sobre tu proyecto o idea..."
+                    ></textarea>
+                    <span class="input-highlight"></span>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-submit">
+                    <span class="btn-text">Enviar Mensaje</span>
+                    <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
+                    <span class="btn-loading"><i class="fas fa-spinner fa-spin"></i></span>
+                </button>
+            </form>
+            
+            <div class="form-message" id="formMessage">
+                <div class="message-content">
+                    <i class="fas fa-check-circle"></i>
+                    <p>¡Mensaje enviado con éxito! Te responderé pronto.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

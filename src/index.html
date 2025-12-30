@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portafolio de Edwin Camilo Valencia Bustamante - Ingeniero de Sistemas y Telecomunicaciones especializado en desarrollo web, automatización y soluciones tecnológicas innovadoras.">
+    <meta name="keywords" content="Ingeniero de Sistemas, Telecomunicaciones, Desarrollador Web, Python, JavaScript, Angular, AWS, Full Stack Developer">
+    <meta name="author" content="Edwin Camilo Valencia Bustamante">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Edwin Valencia | Ingeniero de Sistemas y Telecomunicaciones">
+    <meta property="og:description" content="Transformando ideas en soluciones tecnológicas innovadoras">
+    <meta property="og:image" content="assets/css/images/MIFoto2.0.png">
+    
+    <title>Edwin Valencia | Ingeniero de Sistemas y Telecomunicaciones</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Lightbox -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="code-loader">
+                <span>{</span><span>}</span>
+            </div>
+            <p>Cargando...</p>
+        </div>
+    </div>
+
+    <!-- Cursor personalizado -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Partículas de fondo -->
+    <div id="particles-js"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Navegación -->
+    <div id="navigation-container"></div>
+
+    <!-- Contenido Principal -->
+    <main>
+        <div class="main-wrapper">
+            <div class="content-container">
+                <div class="content-panel">
+                    <!-- Sección de Experiencia/Servicios -->
+                    <div class="content-section" id="services-container"></div>
+                    
+                    <!-- Sección de Proyectos -->
+                    <div class="content-section" id="proyects-container"></div>
+                    
+                    <!-- Sección de Habilidades -->
+                    <div class="content-section" id="skills-container"></div>
+                    
+                    <!-- Sección de Educación -->
+                    <div class="content-section" id="education-section"></div>
+                    
+                    <!-- Sección de Certificados -->
+                    <div class="content-section" id="certificates-section"></div>
+                    
+                    <!-- Sección de Contacto -->
+                    <div class="content-section" id="contact-section"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Botón de volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/scripts.js"></script>
+    
+    <script>
+        // Cargar componentes
+        const components = [
+            { file: 'components/header.html', container: 'header-container' },
+            { file: 'components/navegation.html', container: 'navigation-container' },
+            { file: 'components/services.html', container: 'services-container' },
+            { file: 'components/proyects.html', container: 'proyects-container' },
+            { file: 'components/Habilities.html', container: 'skills-container' },
+            { file: 'components/education.html', container: 'education-section' },
+            { file: 'components/certificados.html', container: 'certificates-section' },
+            { file: 'components/contact.html', container: 'contact-section' },
+            { file: 'components/footer.html', container: 'footer-container' }
+        ];
+
+        // Cargar todos los componentes
+        Promise.all(components.map(comp => 
+            fetch(comp.file)
+                .then(response => response.text())
+                .then(data => {
+                    const element = document.getElementById(comp.container);
+                    if (element) element.innerHTML = data;
+                })
+                .catch(err => console.log(`Componente ${comp.file} no encontrado`))
+        )).then(() => {
+            // Inicializar AOS después de cargar componentes
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out-cubic',
+                once: true,
+                offset: 50
+            });
+        });
+    </script>
+</body>
+</html>
