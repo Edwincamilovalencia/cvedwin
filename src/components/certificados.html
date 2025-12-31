@@ -7,13 +7,13 @@
             </span>
             <h2 class="section-title">Mis Certificados</h2>
             <p class="section-subtitle">
-                Formación continua y validación de conocimientos técnicos
+                Haz clic en cada certificado para verlo en detalle
             </p>
         </div>
         
         <div class="certificates-showcase">
-            <!-- Certificado 1 -->
-            <div class="cert-card" data-aos="zoom-in" data-aos-delay="50">
+            <!-- Certificado 1 - Python -->
+            <div class="cert-card" data-aos="zoom-in" data-aos-delay="50" onclick="openCertModal('Python para Ciencia de Datos', 'IBM - Coursera', '2023', 'assets/images/certificates/python-ibm.jpg')">
                 <div class="cert-card-inner">
                     <div class="cert-icon">
                         <i class="fab fa-python"></i>
@@ -24,13 +24,13 @@
                         <span class="cert-year">2023</span>
                     </div>
                     <div class="cert-badge">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-eye"></i>
                     </div>
                 </div>
             </div>
             
-            <!-- Certificado 2 -->
-            <div class="cert-card" data-aos="zoom-in" data-aos-delay="100">
+            <!-- Certificado 2 - AWS -->
+            <div class="cert-card" data-aos="zoom-in" data-aos-delay="100" onclick="openCertModal('AWS Cloud Foundations', 'Amazon Web Services', '2023', 'assets/images/certificates/aws-cloud.jpg')">
                 <div class="cert-card-inner">
                     <div class="cert-icon">
                         <i class="fab fa-aws"></i>
@@ -41,13 +41,13 @@
                         <span class="cert-year">2023</span>
                     </div>
                     <div class="cert-badge">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-eye"></i>
                     </div>
                 </div>
             </div>
             
-            <!-- Certificado 3 -->
-            <div class="cert-card" data-aos="zoom-in" data-aos-delay="150">
+            <!-- Certificado 3 - Angular -->
+            <div class="cert-card" data-aos="zoom-in" data-aos-delay="150" onclick="openCertModal('Angular: De cero a experto', 'Udemy', '2022', 'assets/images/certificates/angular.jpg')">
                 <div class="cert-card-inner">
                     <div class="cert-icon">
                         <i class="fab fa-angular"></i>
@@ -58,13 +58,13 @@
                         <span class="cert-year">2022</span>
                     </div>
                     <div class="cert-badge">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-eye"></i>
                     </div>
                 </div>
             </div>
             
-            <!-- Certificado 4 -->
-            <div class="cert-card" data-aos="zoom-in" data-aos-delay="200">
+            <!-- Certificado 4 - SQL -->
+            <div class="cert-card" data-aos="zoom-in" data-aos-delay="200" onclick="openCertModal('SQL y PostgreSQL', 'Platzi', '2022', 'assets/images/certificates/sql-postgresql.jpg')">
                 <div class="cert-card-inner">
                     <div class="cert-icon">
                         <i class="fas fa-database"></i>
@@ -75,13 +75,13 @@
                         <span class="cert-year">2022</span>
                     </div>
                     <div class="cert-badge">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-eye"></i>
                     </div>
                 </div>
             </div>
             
-            <!-- Certificado 5 -->
-            <div class="cert-card" data-aos="zoom-in" data-aos-delay="250">
+            <!-- Certificado 5 - JavaScript -->
+            <div class="cert-card" data-aos="zoom-in" data-aos-delay="250" onclick="openCertModal('JavaScript Moderno ES6+', 'Udemy', '2022', 'assets/images/certificates/javascript.jpg')">
                 <div class="cert-card-inner">
                     <div class="cert-icon">
                         <i class="fab fa-js-square"></i>
@@ -92,13 +92,13 @@
                         <span class="cert-year">2022</span>
                     </div>
                     <div class="cert-badge">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-eye"></i>
                     </div>
                 </div>
             </div>
             
-            <!-- Certificado 6 -->
-            <div class="cert-card" data-aos="zoom-in" data-aos-delay="300">
+            <!-- Certificado 6 - Git -->
+            <div class="cert-card" data-aos="zoom-in" data-aos-delay="300" onclick="openCertModal('Git y GitHub Profesional', 'Platzi', '2022', 'assets/images/certificates/git-github.jpg')">
                 <div class="cert-card-inner">
                     <div class="cert-icon">
                         <i class="fab fa-git-alt"></i>
@@ -109,13 +109,13 @@
                         <span class="cert-year">2022</span>
                     </div>
                     <div class="cert-badge">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-eye"></i>
                     </div>
                 </div>
             </div>
             
-            <!-- Certificado 7 -->
-            <div class="cert-card" data-aos="zoom-in" data-aos-delay="350">
+            <!-- Certificado 7 - Docker -->
+            <div class="cert-card" data-aos="zoom-in" data-aos-delay="350" onclick="openCertModal('Docker: Guía Práctica', 'Udemy', '2023', 'assets/images/certificates/docker.jpg')">
                 <div class="cert-card-inner">
                     <div class="cert-icon">
                         <i class="fab fa-docker"></i>
@@ -126,13 +126,13 @@
                         <span class="cert-year">2023</span>
                     </div>
                     <div class="cert-badge">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-eye"></i>
                     </div>
                 </div>
             </div>
             
-            <!-- Certificado 8 -->
-            <div class="cert-card" data-aos="zoom-in" data-aos-delay="400">
+            <!-- Certificado 8 - AI -->
+            <div class="cert-card" data-aos="zoom-in" data-aos-delay="400" onclick="openCertModal('Inteligencia Artificial', 'Google - Coursera', '2024', 'assets/images/certificates/ai-google.jpg')">
                 <div class="cert-card-inner">
                     <div class="cert-icon">
                         <i class="fas fa-robot"></i>
@@ -143,78 +143,102 @@
                         <span class="cert-year">2024</span>
                     </div>
                     <div class="cert-badge">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-eye"></i>
                     </div>
                 </div>
             </div>
             
-            <!-- Certificado 9 -->
-            <div class="cert-card" data-aos="zoom-in" data-aos-delay="450">
+            <!-- Certificado 9 - Linux -->
+            <div class="cert-card" data-aos="zoom-in" data-aos-delay="450" onclick="openCertModal('Linux Essentials', 'Linux Foundation', '2023', 'assets/images/certificates/linux.jpg')">
                 <div class="cert-card-inner">
                     <div class="cert-icon">
                         <i class="fab fa-linux"></i>
                     </div>
                     <div class="cert-content">
-                        <h3>Linux Fundamentals</h3>
+                        <h3>Linux Essentials</h3>
                         <p class="cert-issuer">Linux Foundation</p>
                         <span class="cert-year">2023</span>
                     </div>
                     <div class="cert-badge">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-eye"></i>
                     </div>
                 </div>
             </div>
             
-            <!-- Certificado 10 -->
-            <div class="cert-card" data-aos="zoom-in" data-aos-delay="500">
+            <!-- Certificado 10 - Redes -->
+            <div class="cert-card" data-aos="zoom-in" data-aos-delay="500" onclick="openCertModal('Fundamentos de Redes', 'Cisco Networking Academy', '2023', 'assets/images/certificates/networking.jpg')">
                 <div class="cert-card-inner">
                     <div class="cert-icon">
                         <i class="fas fa-network-wired"></i>
                     </div>
                     <div class="cert-content">
-                        <h3>Redes y Telecomunicaciones</h3>
-                        <p class="cert-issuer">Cisco - CCNA</p>
-                        <span class="cert-year">2024</span>
+                        <h3>Fundamentos de Redes</h3>
+                        <p class="cert-issuer">Cisco Networking Academy</p>
+                        <span class="cert-year">2023</span>
                     </div>
                     <div class="cert-badge">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-eye"></i>
                     </div>
                 </div>
             </div>
             
-            <!-- Certificado 11 -->
-            <div class="cert-card" data-aos="zoom-in" data-aos-delay="550">
+            <!-- Certificado 11 - Ciberseguridad -->
+            <div class="cert-card" data-aos="zoom-in" data-aos-delay="550" onclick="openCertModal('Ciberseguridad Básica', 'Google - Coursera', '2024', 'assets/images/certificates/cybersecurity.jpg')">
                 <div class="cert-card-inner">
                     <div class="cert-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <div class="cert-content">
                         <h3>Ciberseguridad Básica</h3>
-                        <p class="cert-issuer">IBM SkillsBuild</p>
+                        <p class="cert-issuer">Google - Coursera</p>
                         <span class="cert-year">2024</span>
                     </div>
                     <div class="cert-badge">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-eye"></i>
                     </div>
                 </div>
             </div>
             
-            <!-- Certificado 12 -->
-            <div class="cert-card" data-aos="zoom-in" data-aos-delay="600">
+            <!-- Certificado 12 - Scrum -->
+            <div class="cert-card" data-aos="zoom-in" data-aos-delay="600" onclick="openCertModal('Scrum y Metodologías Ágiles', 'Platzi', '2023', 'assets/images/certificates/scrum-agile.jpg')">
                 <div class="cert-card-inner">
                     <div class="cert-icon">
-                        <i class="fas fa-code-branch"></i>
+                        <i class="fas fa-tasks"></i>
                     </div>
                     <div class="cert-content">
-                        <h3>Metodologías Ágiles</h3>
-                        <p class="cert-issuer">Scrum.org</p>
-                        <span class="cert-year">2024</span>
+                        <h3>Scrum y Metodologías Ágiles</h3>
+                        <p class="cert-issuer">Platzi</p>
+                        <span class="cert-year">2023</span>
                     </div>
                     <div class="cert-badge">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-eye"></i>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Modal para Certificados -->
+<div id="cert-modal" class="cert-modal">
+    <div class="cert-modal-overlay" onclick="closeCertModal()"></div>
+    <div class="cert-modal-content">
+        <button class="cert-modal-close" onclick="closeCertModal()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="cert-modal-header">
+            <h3 id="cert-modal-title"></h3>
+            <p id="cert-modal-issuer"></p>
+            <span id="cert-modal-year" class="cert-year"></span>
+        </div>
+        <div class="cert-modal-body">
+            <img id="cert-modal-image" src="" alt="Certificado" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22%3E%3Crect fill=%22%231a1a2e%22 width=%22400%22 height=%22300%22/%3E%3Ctext fill=%22%2300e5ff%22 font-family=%22Arial%22 font-size=%2216%22 x=%2250%25%22 y=%2245%25%22 text-anchor=%22middle%22%3ECertificado%3C/text%3E%3Ctext fill=%22%23888%22 font-family=%22Arial%22 font-size=%2212%22 x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22%3EImagen próximamente%3C/text%3E%3C/svg%3E'">
+        </div>
+        <div class="cert-modal-footer">
+            <span class="cert-verified">
+                <i class="fas fa-check-circle"></i>
+                Certificado Verificado
+            </span>
+        </div>
+    </div>
+</div>
