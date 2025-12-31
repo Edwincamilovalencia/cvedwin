@@ -1,11 +1,11 @@
 /**
- * Portfolio - Edwin Camilo Valencia Bustamante
+ * Portfolio Ultra-Profesional - Edwin Camilo Valencia Bustamante
  * Ingeniero de Sistemas y Telecomunicaciones
- * Scripts principales
+ * Scripts Avanzados con Efectos Premium
  */
 
 // ============================================
-// Configuración
+// Configuración Global
 // ============================================
 const CONFIG = {
     emailjs: {
@@ -22,11 +22,20 @@ const CONFIG = {
         { id: 'certificates-section', file: 'components/certificados.html' },
         { id: 'contact-section', file: 'components/contact.html' },
         { id: 'footer-container', file: 'components/footer.html' }
-    ]
+    ],
+    typingTexts: [
+        'Ingeniero de Sistemas',
+        'Desarrollador Full Stack',
+        'Especialista en Python',
+        'Entusiasta de la IA',
+        'Creador de Soluciones'
+    ],
+    typingSpeed: 100,
+    typingDelay: 2000
 };
 
 // ============================================
-// Carga de componentes
+// Carga de Componentes
 // ============================================
 async function loadComponent(containerId, componentPath) {
     try {
@@ -48,21 +57,22 @@ async function loadAllComponents() {
     );
     await Promise.all(promises);
     
-    // Inicializar funcionalidades después de cargar componentes
-    initializeAfterLoad();
+    // Inicializar todo después de cargar
+    initializeApp();
 }
 
 // ============================================
-// Inicialización después de cargar componentes
+// Inicialización Principal
 // ============================================
-function initializeAfterLoad() {
-    // Inicializar AOS
+function initializeApp() {
+    // Inicializar AOS (Animate On Scroll)
     if (typeof AOS !== 'undefined') {
         AOS.init({
             duration: 800,
-            easing: 'ease-out',
+            easing: 'ease-out-cubic',
             once: true,
-            offset: 50
+            offset: 50,
+            delay: 0
         });
     }
     
@@ -71,15 +81,23 @@ function initializeAfterLoad() {
         lightbox.option({
             'resizeDuration': 200,
             'wrapAround': true,
-            'albumLabel': 'Imagen %1 de %2'
+            'albumLabel': 'Imagen %1 de %2',
+            'fadeDuration': 300
         });
     }
     
-    // Configurar formulario de contacto
+    // Inicializar funcionalidades
+    initTypingEffect();
+    initCounterAnimation();
+    initSkillBars();
+    initNavigation();
+    initCustomCursor();
+    initBackToTop();
     setupContactForm();
+    updateCurrentYear();
     
-    // Navegación activa
-    setupActiveNavigation();
+    // Ocultar preloader
+    hidePreloader();
 }
 
 // ============================================
@@ -88,78 +106,266 @@ function initializeAfterLoad() {
 function hidePreloader() {
     const preloader = document.getElementById('preloader');
     if (preloader) {
-        preloader.classList.add('hidden');
         setTimeout(() => {
-            preloader.style.display = 'none';
+            preloader.classList.add('hidden');
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 600);
         }, 500);
     }
 }
 
 // ============================================
-// Cursor personalizado
+// Efecto de Typing
+// ============================================
+function initTypingEffect() {
+    const typingElement = document.getElementById('typing-text');
+    if (!typingElement) return;
+    
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    function type() {
+        const currentText = CONFIG.typingTexts[textIndex];
+        
+        if (isDeleting) {
+            typingElement.textContent = currentText.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typingElement.textContent = currentText.substring(0, charIndex + 1);
+            charIndex++;
+        }
+        
+        let typeSpeed = CONFIG.typingSpeed;
+        
+        if (isDeleting) {
+            typeSpeed /= 2;
+        }
+        
+        if (!isDeleting && charIndex === currentText.length) {
+            typeSpeed = CONFIG.typingDelay;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % CONFIG.typingTexts.length;
+            typeSpeed = 500;
+        }
+        
+        setTimeout(type, typeSpeed);
+    }
+    
+    type();
+}
+
+// ============================================
+// Animación de Contadores
+// ============================================
+function initCounterAnimation() {
+    const counters = document.querySelectorAll('.stat-number[data-count]');
+    
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = parseInt(counter.getAttribute('data-count'));
+                animateCounter(counter, target);
+                observer.unobserve(counter);
+            }
+        });
+    }, observerOptions);
+    
+    counters.forEach(counter => observer.observe(counter));
+}
+
+function animateCounter(element, target) {
+    const duration = 2000;
+    const startTime = performance.now();
+    const startValue = 0;
+    
+    function updateCounter(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function (ease-out-expo)
+        const easeOutExpo = 1 - Math.pow(2, -10 * progress);
+        const currentValue = Math.floor(startValue + (target - startValue) * easeOutExpo);
+        
+        element.textContent = currentValue;
+        
+        if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+        } else {
+            element.textContent = target;
+            // Agregar + si es el contador de compromiso
+            if (target === 100) {
+                element.textContent = target + '%';
+            } else if (target > 10) {
+                element.textContent = target + '+';
+            }
+        }
+    }
+    
+    requestAnimationFrame(updateCounter);
+}
+
+// ============================================
+// Barras de Habilidades Animadas
+// ============================================
+function initSkillBars() {
+    const skillBars = document.querySelectorAll('.skill-progress');
+    
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    skillBars.forEach(bar => observer.observe(bar));
+}
+
+// ============================================
+// Navegación
+// ============================================
+function initNavigation() {
+    const nav = document.getElementById('main-nav');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section[id], header[id]');
+    
+    // Scroll effect para nav
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (nav) {
+            if (currentScroll > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        }
+        
+        // Actualizar link activo
+        updateActiveNav(sections, navLinks);
+        
+        lastScroll = currentScroll;
+    });
+    
+    // Smooth scroll para links
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const offsetTop = targetSection.offsetTop - 100;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+function updateActiveNav(sections, navLinks) {
+    const scrollY = window.scrollY + 150;
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
+}
+
+// ============================================
+// Cursor Personalizado
 // ============================================
 function initCustomCursor() {
     const cursor = document.querySelector('.cursor');
     const follower = document.querySelector('.cursor-follower');
     
     if (!cursor || !follower) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     
-    // Solo en dispositivos con mouse
-    if (window.matchMedia('(pointer: fine)').matches) {
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
         
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            cursor.style.left = mouseX + 'px';
-            cursor.style.top = mouseY + 'px';
-        });
+        cursor.style.left = mouseX + 'px';
+        cursor.style.top = mouseY + 'px';
+    });
+    
+    // Animación suave del follower
+    function animateFollower() {
+        cursorX += (mouseX - cursorX) * 0.12;
+        cursorY += (mouseY - cursorY) * 0.12;
         
-        // Animación suave del follower
-        function animateFollower() {
-            cursorX += (mouseX - cursorX) * 0.15;
-            cursorY += (mouseY - cursorY) * 0.15;
-            
-            follower.style.left = cursorX + 'px';
-            follower.style.top = cursorY + 'px';
-            
-            requestAnimationFrame(animateFollower);
-        }
-        animateFollower();
+        follower.style.left = cursorX + 'px';
+        follower.style.top = cursorY + 'px';
         
-        // Efecto hover en elementos interactivos
-        const interactiveElements = document.querySelectorAll('a, button, .btn, .nav-btn, .project-card, .skill-item');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                follower.style.transform = 'translate(-50%, -50%) scale(1.5)';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                follower.style.transform = 'translate(-50%, -50%) scale(1)';
-            });
-        });
+        requestAnimationFrame(animateFollower);
     }
-}
-
-// ============================================
-// Back to Top Button
-// ============================================
-function initBackToTop() {
-    const backToTopBtn = document.getElementById('back-to-top');
-    if (!backToTopBtn) return;
+    animateFollower();
     
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTopBtn.classList.add('visible');
-        } else {
-            backToTopBtn.classList.remove('visible');
+    // Efecto hover
+    const hoverElements = 'a, button, .btn, .nav-link, .project-card, .skill-icon-card, .social-link, .certificate-card, .contact-item';
+    
+    document.addEventListener('mouseover', (e) => {
+        if (e.target.closest(hoverElements)) {
+            follower.classList.add('hover');
         }
     });
     
-    backToTopBtn.addEventListener('click', () => {
+    document.addEventListener('mouseout', (e) => {
+        if (e.target.closest(hoverElements)) {
+            follower.classList.remove('hover');
+        }
+    });
+}
+
+// ============================================
+// Botón Back to Top
+// ============================================
+function initBackToTop() {
+    const backToTop = document.getElementById('back-to-top');
+    if (!backToTop) return;
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+    
+    backToTop.addEventListener('click', () => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -168,39 +374,7 @@ function initBackToTop() {
 }
 
 // ============================================
-// Navegación activa
-// ============================================
-function setupActiveNavigation() {
-    const navButtons = document.querySelectorAll('.nav-btn');
-    const sections = document.querySelectorAll('section[id]');
-    
-    if (navButtons.length === 0 || sections.length === 0) return;
-    
-    function setActiveNav() {
-        const scrollY = window.scrollY + 100;
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            
-            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-                navButtons.forEach(btn => {
-                    btn.classList.remove('active');
-                    if (btn.getAttribute('href') === `#${sectionId}`) {
-                        btn.classList.add('active');
-                    }
-                });
-            }
-        });
-    }
-    
-    window.addEventListener('scroll', setActiveNav);
-    setActiveNav();
-}
-
-// ============================================
-// Formulario de contacto
+// Formulario de Contacto
 // ============================================
 function setupContactForm() {
     const form = document.getElementById('contact-form');
@@ -209,148 +383,172 @@ function setupContactForm() {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const submitBtn = form.querySelector('.submit-btn');
+        const submitBtn = form.querySelector('.form-submit');
         const originalText = submitBtn.innerHTML;
         
         // Estado de carga
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
         submitBtn.disabled = true;
         
-        // Obtener datos del formulario
-        const formData = {
-            name: form.querySelector('#name').value,
-            email: form.querySelector('#email').value,
-            message: form.querySelector('#message').value
-        };
+        // Obtener datos
+        const formData = new FormData(form);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const subject = formData.get('subject') || 'Contacto desde Portafolio';
+        const message = formData.get('message');
         
+        // Intentar con EmailJS primero
         try {
-            // Intentar enviar con EmailJS si está configurado
             if (typeof emailjs !== 'undefined' && CONFIG.emailjs.publicKey !== 'YOUR_PUBLIC_KEY') {
-                await emailjs.send(
-                    CONFIG.emailjs.serviceId,
-                    CONFIG.emailjs.templateId,
-                    formData
-                );
+                await emailjs.send(CONFIG.emailjs.serviceId, CONFIG.emailjs.templateId, {
+                    from_name: name,
+                    from_email: email,
+                    subject: subject,
+                    message: message
+                });
+                
                 showNotification('¡Mensaje enviado correctamente!', 'success');
+                form.reset();
             } else {
-                // Fallback: mostrar datos y abrir cliente de correo
-                const mailtoLink = `mailto:edwincamilovalencia@gmail.com?subject=Contacto desde Portafolio - ${formData.name}&body=${encodeURIComponent(`Nombre: ${formData.name}\nEmail: ${formData.email}\n\nMensaje:\n${formData.message}`)}`;
-                window.open(mailtoLink);
-                showNotification('Se abrirá tu cliente de correo para enviar el mensaje.', 'success');
+                // Fallback a mailto
+                const mailtoLink = `mailto:edwincamilovalencia2014@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\n\nMensaje:\n${message}`)}`;
+                window.location.href = mailtoLink;
+                showNotification('Abriendo cliente de correo...', 'info');
             }
-            
-            form.reset();
         } catch (error) {
-            console.error('Error al enviar:', error);
-            showNotification('Error al enviar el mensaje. Por favor, intenta de nuevo.', 'error');
-        } finally {
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
+            console.error('Error enviando mensaje:', error);
+            showNotification('Error al enviar. Intenta de nuevo.', 'error');
         }
+        
+        // Restaurar botón
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
     });
 }
 
 // ============================================
 // Notificaciones
 // ============================================
-function showNotification(message, type = 'success') {
-    // Crear elemento de notificación
+function showNotification(message, type = 'info') {
+    // Remover notificación existente
+    const existing = document.querySelector('.notification');
+    if (existing) existing.remove();
+    
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.innerHTML = `
-        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+        <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
         <span>${message}</span>
     `;
     
-    // Estilos inline para la notificación
+    // Estilos
     Object.assign(notification.style, {
         position: 'fixed',
-        bottom: '20px',
+        bottom: '30px',
         left: '50%',
-        transform: 'translateX(-50%)',
-        padding: '15px 25px',
-        borderRadius: '8px',
+        transform: 'translateX(-50%) translateY(100px)',
+        padding: '16px 24px',
+        background: type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6',
         color: 'white',
-        fontWeight: '500',
+        borderRadius: '12px',
         display: 'flex',
         alignItems: 'center',
         gap: '10px',
+        fontSize: '0.95rem',
+        fontWeight: '500',
+        boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
         zIndex: '10000',
-        animation: 'slideUp 0.3s ease',
-        background: type === 'success' ? '#10b981' : '#ef4444'
+        transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
     });
     
     document.body.appendChild(notification);
     
+    // Animar entrada
+    requestAnimationFrame(() => {
+        notification.style.transform = 'translateX(-50%) translateY(0)';
+    });
+    
     // Remover después de 4 segundos
     setTimeout(() => {
-        notification.style.animation = 'slideDown 0.3s ease forwards';
-        setTimeout(() => notification.remove(), 300);
+        notification.style.transform = 'translateX(-50%) translateY(100px)';
+        setTimeout(() => notification.remove(), 400);
     }, 4000);
 }
 
-// Añadir estilos de animación para notificaciones
-const notificationStyles = document.createElement('style');
-notificationStyles.textContent = `
-    @keyframes slideUp {
-        from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-        to { opacity: 1; transform: translateX(-50%) translateY(0); }
+// ============================================
+// Actualizar Año
+// ============================================
+function updateCurrentYear() {
+    const yearElement = document.getElementById('current-year');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
     }
-    @keyframes slideDown {
-        from { opacity: 1; transform: translateX(-50%) translateY(0); }
-        to { opacity: 0; transform: translateX(-50%) translateY(20px); }
-    }
-`;
-document.head.appendChild(notificationStyles);
+}
 
 // ============================================
-// Smooth scroll para links internos
+// Parallax Effect (Opcional - Performance)
 // ============================================
-function initSmoothScroll() {
-    document.addEventListener('click', (e) => {
-        const link = e.target.closest('a[href^="#"]');
-        if (!link) return;
+function initParallax() {
+    const parallaxElements = document.querySelectorAll('[data-parallax]');
+    
+    if (parallaxElements.length === 0) return;
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
         
-        const targetId = link.getAttribute('href');
-        if (targetId === '#') return;
+        parallaxElements.forEach(el => {
+            const speed = el.getAttribute('data-parallax') || 0.5;
+            const yPos = -(scrolled * speed);
+            el.style.transform = `translateY(${yPos}px)`;
+        });
+    }, { passive: true });
+}
+
+// ============================================
+// Profile Card 3D Tilt Effect
+// ============================================
+function initProfileTilt() {
+    const card = document.querySelector('.profile-card');
+    if (!card) return;
+    
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
         
-        const target = document.querySelector(targetId);
-        if (target) {
-            e.preventDefault();
-            const navHeight = document.querySelector('.navigation-section')?.offsetHeight || 70;
-            const targetPosition = target.offsetTop - navHeight;
-            
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
+        
+        const inner = card.querySelector('.profile-card-inner');
+        if (inner) {
+            inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        }
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        const inner = card.querySelector('.profile-card-inner');
+        if (inner) {
+            inner.style.transform = 'rotateX(0) rotateY(0)';
         }
     });
 }
 
 // ============================================
-// Inicialización principal
+// Inicialización al cargar DOM
 // ============================================
-document.addEventListener('DOMContentLoaded', async () => {
-    // Cargar todos los componentes
-    await loadAllComponents();
-    
-    // Ocultar preloader
-    setTimeout(hidePreloader, 500);
-    
-    // Inicializar funcionalidades
-    initCustomCursor();
-    initBackToTop();
-    initSmoothScroll();
+document.addEventListener('DOMContentLoaded', () => {
+    loadAllComponents();
 });
 
-// Si la página ya está cargada
-if (document.readyState === 'complete') {
-    loadAllComponents().then(() => {
-        hidePreloader();
-        initCustomCursor();
-        initBackToTop();
-        initSmoothScroll();
-    });
-}
+// ============================================
+// Exponer funciones globalmente si es necesario
+// ============================================
+window.portfolioApp = {
+    showNotification,
+    initTypingEffect,
+    initCounterAnimation
+};
 
