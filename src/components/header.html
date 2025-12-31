@@ -1,59 +1,63 @@
 <header class="hero-section" id="inicio">
     <div class="hero-background">
         <div class="gradient-overlay"></div>
-        <div class="grid-pattern"></div>
     </div>
     
     <div class="hero-container">
-        <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
-            <div class="status-badge">
-                <span class="status-dot"></span>
-                <span>Disponible para proyectos</span>
-            </div>
-            
-            <div class="hero-text">
-                <span class="greeting">Hola, soy</span>
-                <h1 class="hero-title">
-                    <span class="name-highlight">Edwin Camilo</span>
-                    <span class="name-secondary">Valencia Bustamante</span>
-                </h1>
-                <div class="title-wrapper">
-                    <span class="title-icon"><i class="fas fa-microchip"></i></span>
-                    <h2 class="hero-subtitle">
-                        <span class="typing-text">Ingeniero de Sistemas y Telecomunicaciones</span>
-                    </h2>
+        <!-- Visual con foto y órbitas -->
+        <div class="hero-visual" data-aos="fade-up" data-aos-duration="1000">
+            <div class="profile-card">
+                <div class="profile-glow"></div>
+                <div class="profile-ring"></div>
+                <div class="profile-image-container">
+                    <img src="assets/css/images/MIFoto2.0.png" alt="Edwin Camilo Valencia Bustamante - Ingeniero de Sistemas" class="profile-image">
                 </div>
             </div>
             
-            <p class="hero-description">
-                Transformo ideas en <strong>soluciones tecnológicas innovadoras</strong>. 
-                Especializado en desarrollo web, automatización de procesos y arquitectura de sistemas.
-                Apasionado por crear experiencias digitales que generen impacto.
-            </p>
-            
-            <div class="hero-stats">
-                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
-                    <span class="stat-number" data-count="5">0</span><span class="stat-plus">+</span>
-                    <span class="stat-label">Años de experiencia</span>
+            <!-- Sistema de órbitas animadas -->
+            <div class="orbit-system">
+                <div class="orbit orbit-1">
+                    <div class="planet planet-orange"></div>
                 </div>
-                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
-                    <span class="stat-number" data-count="20">0</span><span class="stat-plus">+</span>
-                    <span class="stat-label">Proyectos completados</span>
+                <div class="orbit orbit-2">
+                    <div class="planet planet-cyan"></div>
+                    <div class="planet planet-pink"></div>
                 </div>
-                <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
-                    <span class="stat-number" data-count="10">0</span><span class="stat-plus">+</span>
-                    <span class="stat-label">Tecnologías dominadas</span>
+                <div class="orbit orbit-3">
+                    <div class="planet planet-blue"></div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Contenido principal -->
+        <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
+            <h1 class="hero-title">Edwin Camilo Valencia Bustamante</h1>
+            <h2 class="hero-subtitle">Ingeniero de sistemas y telecomunicaciones</h2>
+        </div>
+    </div>
+</header>
+
+<!-- Sección Sobre Mí -->
+<section class="about-section" id="sobre-mi" data-aos="fade-up">
+    <div class="about-container">
+        <h2 class="section-title">Sobre mi</h2>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <p class="about-intro">
+                    <span class="highlight-text">Hola</span> 👋
+                </p>
+                <p>
+                    Mi nombre es <strong>Edwin Camilo Valencia Bustamante</strong>, soy ingeniero
+                    de sistemas y telecomunicaciones, y disfruto transformar ideas
+                    en soluciones prácticas a través de la tecnología.
+                </p>
             </div>
             
             <div class="hero-actions">
                 <a href="cv/cvEdwinCamiloValenciaBustamante.pdf" class="btn btn-primary" download>
                     <i class="fas fa-download"></i>
                     <span>Descargar CV</span>
-                </a>
-                <a href="#contactame" class="btn btn-secondary">
-                    <i class="fas fa-paper-plane"></i>
-                    <span>Contáctame</span>
                 </a>
             </div>
             
@@ -64,131 +68,6 @@
                 <a href="https://www.linkedin.com/in/edwin-valencia-819b80250/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
                     <i class="fab fa-linkedin-in"></i>
                 </a>
-                <a href="mailto:edwincamilovalencia@gmail.com" class="social-link" aria-label="Email">
-                    <i class="fas fa-envelope"></i>
-                </a>
-                <a href="https://wa.me/573105364042" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="hero-visual" data-aos="fade-left" data-aos-duration="1000">
-            <div class="profile-card">
-                <div class="profile-glow"></div>
-                <div class="profile-ring"></div>
-                <div class="profile-image-container">
-                    <img src="assets/css/images/MIFoto2.0.png" alt="Edwin Camilo Valencia Bustamante - Ingeniero de Sistemas" class="profile-image">
-                </div>
-                <div class="profile-badge">
-                    <i class="fas fa-check-circle"></i>
-                    <span>Verificado</span>
-                </div>
-            </div>
-            
-            <!-- Elementos flotantes decorativos -->
-            <div class="floating-elements">
-                <div class="floating-icon" style="--delay: 0s; --x: -60px; --y: -40px;">
-                    <i class="fab fa-python"></i>
-                </div>
-                <div class="floating-icon" style="--delay: 0.5s; --x: 80px; --y: -20px;">
-                    <i class="fab fa-js-square"></i>
-                </div>
-                <div class="floating-icon" style="--delay: 1s; --x: 100px; --y: 60px;">
-                    <i class="fab fa-angular"></i>
-                </div>
-                <div class="floating-icon" style="--delay: 1.5s; --x: -80px; --y: 80px;">
-                    <i class="fab fa-aws"></i>
-                </div>
-                <div class="floating-icon" style="--delay: 2s; --x: 40px; --y: 120px;">
-                    <i class="fas fa-database"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Scroll indicator -->
-    <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="1000">
-        <span>Scroll para explorar</span>
-        <div class="scroll-mouse">
-            <div class="scroll-wheel"></div>
-        </div>
-    </div>
-</header>
-
-<!-- Sección Sobre Mí -->
-<section class="about-section" id="sobre-mi" data-aos="fade-up">
-    <div class="about-container">
-        <div class="section-header">
-            <span class="section-tag"><i class="fas fa-user"></i> Conóceme</span>
-            <h2 class="section-title">Sobre Mí</h2>
-        </div>
-        
-        <div class="about-content">
-            <div class="about-text">
-                <p class="about-intro">
-                    <span class="highlight-text">¡Hola! 👋</span> Soy <strong>Edwin Camilo Valencia Bustamante</strong>, 
-                    un apasionado <strong>Ingeniero de Sistemas y Telecomunicaciones</strong> con una misión clara: 
-                    transformar ideas en realidades tecnológicas.
-                </p>
-                <p>
-                    Con experiencia en <strong>desarrollo full-stack</strong>, <strong>automatización de procesos</strong> 
-                    y <strong>arquitectura de sistemas</strong>, me especializo en crear soluciones que no solo funcionan, 
-                    sino que también generan valor real para los negocios.
-                </p>
-                <p>
-                    Mi enfoque combina <strong>creatividad técnica</strong> con un profundo entendimiento de las 
-                    necesidades del usuario, permitiéndome desarrollar productos digitales intuitivos y escalables.
-                </p>
-                
-                <div class="about-highlights">
-                    <div class="highlight-item">
-                        <i class="fas fa-rocket"></i>
-                        <span>Orientado a resultados</span>
-                    </div>
-                    <div class="highlight-item">
-                        <i class="fas fa-lightbulb"></i>
-                        <span>Pensamiento innovador</span>
-                    </div>
-                    <div class="highlight-item">
-                        <i class="fas fa-users"></i>
-                        <span>Trabajo en equipo</span>
-                    </div>
-                    <div class="highlight-item">
-                        <i class="fas fa-book"></i>
-                        <span>Aprendizaje continuo</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="about-info-cards">
-                <div class="info-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="info-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="info-content">
-                        <span class="info-label">Ubicación</span>
-                        <span class="info-value">Colombia 🇨🇴</span>
-                    </div>
-                </div>
-                <div class="info-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="info-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="info-content">
-                        <span class="info-label">Título</span>
-                        <span class="info-value">Ing. Sistemas y Telecomunicaciones</span>
-                    </div>
-                </div>
-                <div class="info-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="info-icon">
-                        <i class="fas fa-language"></i>
-                    </div>
-                    <div class="info-content">
-                        <span class="info-label">Idiomas</span>
-                        <span class="info-value">Español (Nativo) • Inglés (B2)</span>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

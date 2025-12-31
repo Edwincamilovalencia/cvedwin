@@ -1,117 +1,356 @@
-// Scripts mejorados para el portafolio
+/**
+ * Portfolio - Edwin Camilo Valencia Bustamante
+ * Ingeniero de Sistemas y Telecomunicaciones
+ * Scripts principales
+ */
 
-// Inicializar EmailJS (si está disponible)
-(function(){
+// ============================================
+// Configuración
+// ============================================
+const CONFIG = {
+    emailjs: {
+        publicKey: 'YOUR_PUBLIC_KEY',
+        serviceId: 'YOUR_SERVICE_ID',
+        templateId: 'YOUR_TEMPLATE_ID'
+    },
+    components: [
+        { id: 'header-container', file: 'components/header.html' },
+        { id: 'navigation-container', file: 'components/navegation.html' },
+        { id: 'proyects-container', file: 'components/proyects.html' },
+        { id: 'skills-container', file: 'components/Habilities.html' },
+        { id: 'education-section', file: 'components/education.html' },
+        { id: 'certificates-section', file: 'components/certificados.html' },
+        { id: 'contact-section', file: 'components/contact.html' },
+        { id: 'footer-container', file: 'components/footer.html' }
+    ]
+};
+
+// ============================================
+// Carga de componentes
+// ============================================
+async function loadComponent(containerId, componentPath) {
     try {
-        if (typeof emailjs !== 'undefined') {
-            emailjs.init('eiaRBfy6I2Dacouy4');
-            console.log('EmailJS inicializado');
+        const response = await fetch(componentPath);
+        if (!response.ok) throw new Error(`Error cargando ${componentPath}`);
+        const html = await response.text();
+        const container = document.getElementById(containerId);
+        if (container) {
+            container.innerHTML = html;
         }
-    } catch (e) {
-        console.warn('EmailJS no disponible', e);
+    } catch (error) {
+        console.warn(`No se pudo cargar ${componentPath}:`, error.message);
     }
-})();
+}
 
-// Cargar componentes y funcionalidades cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function(){
-    // Preloader
-    const preloader = document.getElementById('preloader');
-    if (preloader) setTimeout(() => preloader.classList.add('hidden'), 700);
+async function loadAllComponents() {
+    const promises = CONFIG.components.map(comp => 
+        loadComponent(comp.id, comp.file)
+    );
+    await Promise.all(promises);
+    
+    // Inicializar funcionalidades después de cargar componentes
+    initializeAfterLoad();
+}
 
-    // Cargar componentes de la página (solo si existen los contenedores)
-    const components = [
-        { file: 'components/header.html', container: 'header-container' },
-        { file: 'components/navegation.html', container: 'navigation-container' },
-        { file: 'components/services.html', container: 'services-container' },
-        { file: 'components/proyects.html', container: 'proyects-container' },
-        { file: 'components/Habilities.html', container: 'skills-container' },
-        { file: 'components/education.html', container: 'education-section' },
-        { file: 'components/certificados.html', container: 'certificates-section' },
-        { file: 'components/contact.html', container: 'contact-section' },
-        { file: 'components/footer.html', container: 'footer-container' }
-    ];
-
-    Promise.all(components.map(c => fetch(c.file).then(r => r.text()).then(html => {
-        const el = document.getElementById(c.container);
-        if (el) el.innerHTML = html;
-    }).catch(()=>{}))).then(() => {
-        if (typeof AOS !== 'undefined') AOS.init({ duration: 800, once: true });
-    });
-
-    // Cursor personalizado
-    const cursor = document.querySelector('.cursor');
-    const follower = document.querySelector('.cursor-follower');
-    if (cursor && follower) {
-        let mx = 0, my = 0, fx = 0, fy = 0;
-        document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; cursor.style.transform = `translate(${mx}px, ${my}px)`; });
-        const loop = () => { fx += (mx - fx) * 0.14; fy += (my - fy) * 0.14; follower.style.transform = `translate(${fx}px, ${fy}px)`; requestAnimationFrame(loop); };
-        loop();
-    }
-
-    // Back-to-top button
-    const backToTop = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-        if (!backToTop) return;
-        if (window.scrollY > 600) backToTop.classList.add('visible'); else backToTop.classList.remove('visible');
-    });
-    if (backToTop) backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-    // Animated counters
-    document.querySelectorAll('.stat-number').forEach(el => {
-        const target = parseInt(el.dataset.count || '0', 10);
-        const io = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) { animateCount(el, target); io.disconnect(); } }); }, { threshold: 0.6 });
-        io.observe(el);
-    });
-
-    function animateCount(el, to) {
-        let start = 0; const duration = 1200; const step = Math.max(1, Math.floor(to / (duration / 16)));
-        const tick = () => { start += step; if (start >= to) el.textContent = to; else { el.textContent = start; requestAnimationFrame(tick); } };
-        tick();
-    }
-
-    // Mobile menu toggle
-    const navToggle = document.querySelector('.nav-toggle');
-    const mobileOverlay = document.querySelector('.mobile-nav-overlay');
-    if (navToggle) {
-        navToggle.addEventListener('click', () => {
-            const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-            navToggle.setAttribute('aria-expanded', String(!expanded));
-            document.body.classList.toggle('nav-open');
-            if (mobileOverlay) mobileOverlay.classList.toggle('active');
+// ============================================
+// Inicialización después de cargar componentes
+// ============================================
+function initializeAfterLoad() {
+    // Inicializar AOS
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out',
+            once: true,
+            offset: 50
         });
     }
-    if (mobileOverlay) mobileOverlay.addEventListener('click', () => { document.body.classList.remove('nav-open'); mobileOverlay.classList.remove('active'); if (navToggle) navToggle.setAttribute('aria-expanded', 'false'); });
+    
+    // Inicializar Lightbox
+    if (typeof lightbox !== 'undefined') {
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'albumLabel': 'Imagen %1 de %2'
+        });
+    }
+    
+    // Configurar formulario de contacto
+    setupContactForm();
+    
+    // Navegación activa
+    setupActiveNavigation();
+}
 
-    // Smooth anchor behavior
-    document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', function(e){ const href = this.getAttribute('href'); if (href && href.startsWith('#') && href.length>1) { e.preventDefault(); const t = document.querySelector(href); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); document.body.classList.remove('nav-open'); if (mobileOverlay) mobileOverlay.classList.remove('active'); if (navToggle) navToggle.setAttribute('aria-expanded','false'); } }); });
+// ============================================
+// Preloader
+// ============================================
+function hidePreloader() {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        preloader.classList.add('hidden');
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 500);
+    }
+}
 
-    // Contact form handling (EmailJS fallback if not available)
-    const contactForm = document.getElementById('contactForm');
-    const formMessage = document.getElementById('formMessage');
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const btn = contactForm.querySelector('button[type="submit"]');
-            if (btn) { btn.disabled = true; btn.classList.add('loading'); }
-            const params = { from_name: contactForm.name.value, reply_to: contactForm.email.value, subject: contactForm.subject.value || 'Contacto', message: contactForm.message.value };
-            if (typeof emailjs !== 'undefined') {
-                emailjs.send('service_kkudgzm','template_n7qtgrj', params).then(()=> showFormSuccess()).catch(()=> showFormError()).finally(()=> { if (btn) { btn.disabled = false; btn.classList.remove('loading'); } });
-            } else {
-                setTimeout(()=> { showFormSuccess(); if (btn) { btn.disabled = false; btn.classList.remove('loading'); } }, 800);
+// ============================================
+// Cursor personalizado
+// ============================================
+function initCustomCursor() {
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+    
+    if (!cursor || !follower) return;
+    
+    // Solo en dispositivos con mouse
+    if (window.matchMedia('(pointer: fine)').matches) {
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+        });
+        
+        // Animación suave del follower
+        function animateFollower() {
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+            
+            follower.style.left = cursorX + 'px';
+            follower.style.top = cursorY + 'px';
+            
+            requestAnimationFrame(animateFollower);
+        }
+        animateFollower();
+        
+        // Efecto hover en elementos interactivos
+        const interactiveElements = document.querySelectorAll('a, button, .btn, .nav-btn, .project-card, .skill-item');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                follower.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                follower.style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+        });
+    }
+}
+
+// ============================================
+// Back to Top Button
+// ============================================
+function initBackToTop() {
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (!backToTopBtn) return;
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+    
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// ============================================
+// Navegación activa
+// ============================================
+function setupActiveNavigation() {
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const sections = document.querySelectorAll('section[id]');
+    
+    if (navButtons.length === 0 || sections.length === 0) return;
+    
+    function setActiveNav() {
+        const scrollY = window.scrollY + 100;
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+            
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                navButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.getAttribute('href') === `#${sectionId}`) {
+                        btn.classList.add('active');
+                    }
+                });
             }
         });
     }
+    
+    window.addEventListener('scroll', setActiveNav);
+    setActiveNav();
+}
 
-    function showFormSuccess(){ if (formMessage) { formMessage.classList.add('visible'); setTimeout(()=> formMessage.classList.remove('visible'), 3500); } else alert('Mensaje enviado con éxito'); }
-    function showFormError(){ if (formMessage) { formMessage.classList.add('error'); setTimeout(()=> formMessage.classList.remove('error'), 3500); } else alert('Error al enviar el mensaje'); }
+// ============================================
+// Formulario de contacto
+// ============================================
+function setupContactForm() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const submitBtn = form.querySelector('.submit-btn');
+        const originalText = submitBtn.innerHTML;
+        
+        // Estado de carga
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+        submitBtn.disabled = true;
+        
+        // Obtener datos del formulario
+        const formData = {
+            name: form.querySelector('#name').value,
+            email: form.querySelector('#email').value,
+            message: form.querySelector('#message').value
+        };
+        
+        try {
+            // Intentar enviar con EmailJS si está configurado
+            if (typeof emailjs !== 'undefined' && CONFIG.emailjs.publicKey !== 'YOUR_PUBLIC_KEY') {
+                await emailjs.send(
+                    CONFIG.emailjs.serviceId,
+                    CONFIG.emailjs.templateId,
+                    formData
+                );
+                showNotification('¡Mensaje enviado correctamente!', 'success');
+            } else {
+                // Fallback: mostrar datos y abrir cliente de correo
+                const mailtoLink = `mailto:edwincamilovalencia@gmail.com?subject=Contacto desde Portafolio - ${formData.name}&body=${encodeURIComponent(`Nombre: ${formData.name}\nEmail: ${formData.email}\n\nMensaje:\n${formData.message}`)}`;
+                window.open(mailtoLink);
+                showNotification('Se abrirá tu cliente de correo para enviar el mensaje.', 'success');
+            }
+            
+            form.reset();
+        } catch (error) {
+            console.error('Error al enviar:', error);
+            showNotification('Error al enviar el mensaje. Por favor, intenta de nuevo.', 'error');
+        } finally {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+}
 
-    // Initialize particles.js if present
-    if (typeof particlesJS !== 'undefined') {
-        particlesJS('particles-js', { particles: { number: { value: 50, density: { enable: true, value_area: 800 } }, color: { value: ['#4f46e5', '#06b6d4'] }, shape: { type: 'circle' }, opacity: { value: 0.18 }, size: { value: 3 }, line_linked: { enable: true, distance: 120, color: '#0b1020', opacity: 0.06, width: 1 }, move: { enable: true, speed: 1 } }, interactivity: { events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } } } });
+// ============================================
+// Notificaciones
+// ============================================
+function showNotification(message, type = 'success') {
+    // Crear elemento de notificación
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+        <span>${message}</span>
+    `;
+    
+    // Estilos inline para la notificación
+    Object.assign(notification.style, {
+        position: 'fixed',
+        bottom: '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        padding: '15px 25px',
+        borderRadius: '8px',
+        color: 'white',
+        fontWeight: '500',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        zIndex: '10000',
+        animation: 'slideUp 0.3s ease',
+        background: type === 'success' ? '#10b981' : '#ef4444'
+    });
+    
+    document.body.appendChild(notification);
+    
+    // Remover después de 4 segundos
+    setTimeout(() => {
+        notification.style.animation = 'slideDown 0.3s ease forwards';
+        setTimeout(() => notification.remove(), 300);
+    }, 4000);
+}
+
+// Añadir estilos de animación para notificaciones
+const notificationStyles = document.createElement('style');
+notificationStyles.textContent = `
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+        to { opacity: 1; transform: translateX(-50%) translateY(0); }
     }
+    @keyframes slideDown {
+        from { opacity: 1; transform: translateX(-50%) translateY(0); }
+        to { opacity: 0; transform: translateX(-50%) translateY(20px); }
+    }
+`;
+document.head.appendChild(notificationStyles);
 
-    // Accessibility: show focus outlines when using keyboard
-    document.addEventListener('keyup', (e) => { if (e.key === 'Tab') document.body.classList.add('show-focus-outline'); });
+// ============================================
+// Smooth scroll para links internos
+// ============================================
+function initSmoothScroll() {
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href^="#"]');
+        if (!link) return;
+        
+        const targetId = link.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const target = document.querySelector(targetId);
+        if (target) {
+            e.preventDefault();
+            const navHeight = document.querySelector('.navigation-section')?.offsetHeight || 70;
+            const targetPosition = target.offsetTop - navHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+}
 
+// ============================================
+// Inicialización principal
+// ============================================
+document.addEventListener('DOMContentLoaded', async () => {
+    // Cargar todos los componentes
+    await loadAllComponents();
+    
+    // Ocultar preloader
+    setTimeout(hidePreloader, 500);
+    
+    // Inicializar funcionalidades
+    initCustomCursor();
+    initBackToTop();
+    initSmoothScroll();
 });
+
+// Si la página ya está cargada
+if (document.readyState === 'complete') {
+    loadAllComponents().then(() => {
+        hidePreloader();
+        initCustomCursor();
+        initBackToTop();
+        initSmoothScroll();
+    });
+}
 
