@@ -1897,6 +1897,447 @@ a:hover {
 }
 
 /* ==========================================================================
+   ABOUT SECTION - Rediseñado
+   ========================================================================== */
+.about-content-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-2xl);
+    backdrop-filter: var(--glass-blur);
+}
+
+.about-text {
+    margin-bottom: var(--space-xl);
+}
+
+.about-greeting {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-md);
+    color: var(--text-white);
+}
+
+.about-text p {
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--space-md);
+    font-size: 1.05rem;
+}
+
+.about-highlight {
+    color: var(--accent-cyan);
+    font-weight: 600;
+}
+
+.about-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-md);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--glass-border);
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: rgba(var(--accent-cyan-rgb), 0.05);
+    border: 1px solid rgba(var(--accent-cyan-rgb), 0.1);
+    border-radius: var(--radius-md);
+    transition: var(--transition-normal);
+}
+
+.highlight-item:hover {
+    border-color: var(--accent-cyan);
+    transform: translateY(-3px);
+}
+
+.highlight-item i {
+    font-size: 1.25rem;
+    color: var(--accent-cyan);
+}
+
+.highlight-item span {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   TECH SHOWCASE - Nuevo Diseño Sin Porcentajes
+   ========================================================================== */
+.tech-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-xl);
+}
+
+.tech-category {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    transition: var(--transition-normal);
+}
+
+.tech-category:hover {
+    border-color: rgba(var(--accent-cyan-rgb), 0.3);
+    transform: translateY(-5px);
+}
+
+.tech-category-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.tech-category-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    font-size: 1.25rem;
+}
+
+.tech-category-icon.frontend {
+    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+    color: white;
+}
+
+.tech-category-icon.backend {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.tech-category-icon.database {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+}
+
+.tech-category-icon.devops {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: white;
+}
+
+.tech-category-icon.tools {
+    background: linear-gradient(135deg, #a855f7, #7c3aed);
+    color: white;
+}
+
+.tech-category-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-white);
+}
+
+.tech-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.tech-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-md);
+    background: var(--color-dark-700);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    transition: var(--transition-normal);
+    min-width: 80px;
+}
+
+.tech-item:hover {
+    border-color: var(--accent-cyan);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(var(--accent-cyan-rgb), 0.15);
+}
+
+.tech-icon-wrapper {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.tech-item span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-align: center;
+}
+
+/* ==========================================================================
+   EDUCATION SECTION - Rediseñado
+   ========================================================================== */
+.education-cards {
+    display: grid;
+    gap: var(--space-xl);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.education-card {
+    position: relative;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-2xl);
+    display: flex;
+    gap: var(--space-xl);
+    transition: var(--transition-normal);
+    overflow: hidden;
+}
+
+.education-card.main-education {
+    border-color: rgba(var(--accent-cyan-rgb), 0.3);
+}
+
+.education-card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-main);
+}
+
+.education-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(var(--accent-cyan-rgb), 0.5);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.education-icon {
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-main);
+    border-radius: var(--radius-lg);
+    font-size: 2rem;
+    color: var(--color-dark-900);
+}
+
+.education-icon.secondary {
+    background: linear-gradient(135deg, #64748b, #475569);
+    color: white;
+}
+
+.education-content {
+    flex: 1;
+}
+
+.education-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-md);
+    background: rgba(var(--accent-cyan-rgb), 0.1);
+    border: 1px solid rgba(var(--accent-cyan-rgb), 0.2);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.education-badge.secondary {
+    background: rgba(100, 116, 139, 0.1);
+    border-color: rgba(100, 116, 139, 0.2);
+    color: var(--text-muted);
+}
+
+.education-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: var(--space-sm);
+}
+
+.education-institution,
+.education-location {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: var(--space-xs);
+}
+
+.education-institution i,
+.education-location i {
+    color: var(--accent-cyan);
+    font-size: 0.85rem;
+    width: 16px;
+}
+
+.education-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--gradient-main);
+    border-radius: var(--radius-md);
+    color: var(--color-dark-900);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin: var(--space-md) 0;
+}
+
+.education-date-badge.secondary {
+    background: var(--color-dark-600);
+    color: var(--text-muted);
+}
+
+.education-description {
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+    .education-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .education-icon {
+        margin: 0 auto;
+    }
+    
+    .education-institution,
+    .education-location {
+        justify-content: center;
+    }
+    
+    .education-date-badge {
+        margin: var(--space-md) auto;
+    }
+}
+
+/* ==========================================================================
+   CERTIFICATES SHOWCASE - Nuevo Diseño
+   ========================================================================== */
+.certificates-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+}
+
+.cert-card {
+    position: relative;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: var(--transition-normal);
+}
+
+.cert-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-main);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease-out-expo);
+}
+
+.cert-card:hover::before {
+    transform: scaleX(1);
+}
+
+.cert-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(var(--accent-cyan-rgb), 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(var(--accent-cyan-rgb), 0.1);
+}
+
+.cert-card-inner {
+    padding: var(--space-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.cert-icon {
+    width: 55px;
+    height: 55px;
+    min-width: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(var(--accent-cyan-rgb), 0.1);
+    border-radius: var(--radius-md);
+    font-size: 1.5rem;
+    color: var(--accent-cyan);
+}
+
+.cert-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.cert-content h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-white);
+    margin-bottom: var(--space-xs);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cert-issuer {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-xs);
+}
+
+.cert-year {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--color-dark-600);
+    border-radius: var(--radius-sm);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
+}
+
+.cert-badge {
+    color: var(--accent-green);
+    font-size: 1.25rem;
+}
+
+/* ==========================================================================
    PRINT STYLES
    ========================================================================== */
 @media print {
