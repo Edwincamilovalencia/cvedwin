@@ -53,11 +53,11 @@ async function loadComponent(containerId, componentPath) {
 }
 
 async function loadAllComponents() {
-    const promises = CONFIG.components.map(comp => 
+    const promises = CONFIG.components.map(comp =>
         loadComponent(comp.id, comp.file)
     );
     await Promise.all(promises);
-    
+
     // Inicializar todo después de cargar
     initializeApp();
 }
@@ -76,7 +76,7 @@ function initializeApp() {
             delay: 0
         });
     }
-    
+
     // Inicializar Lightbox
     if (typeof lightbox !== 'undefined') {
         lightbox.option({
@@ -86,7 +86,7 @@ function initializeApp() {
             'fadeDuration': 300
         });
     }
-    
+
     // Inicializar funcionalidades
     initTypingEffect();
     initCounterAnimation();
@@ -96,7 +96,7 @@ function initializeApp() {
     initBackToTop();
     setupContactForm();
     updateCurrentYear();
-    
+
     // Ocultar preloader
     hidePreloader();
 }
@@ -122,14 +122,14 @@ function hidePreloader() {
 function initTypingEffect() {
     const typingElement = document.getElementById('typing-text');
     if (!typingElement) return;
-    
+
     let textIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
-    
+
     function type() {
         const currentText = CONFIG.typingTexts[textIndex];
-        
+
         if (isDeleting) {
             typingElement.textContent = currentText.substring(0, charIndex - 1);
             charIndex--;
@@ -137,13 +137,13 @@ function initTypingEffect() {
             typingElement.textContent = currentText.substring(0, charIndex + 1);
             charIndex++;
         }
-        
+
         let typeSpeed = CONFIG.typingSpeed;
-        
+
         if (isDeleting) {
             typeSpeed /= 2;
         }
-        
+
         if (!isDeleting && charIndex === currentText.length) {
             typeSpeed = CONFIG.typingDelay;
             isDeleting = true;
@@ -152,10 +152,10 @@ function initTypingEffect() {
             textIndex = (textIndex + 1) % CONFIG.typingTexts.length;
             typeSpeed = 500;
         }
-        
+
         setTimeout(type, typeSpeed);
     }
-    
+
     type();
 }
 
@@ -164,12 +164,12 @@ function initTypingEffect() {
 // ============================================
 function initCounterAnimation() {
     const counters = document.querySelectorAll('.stat-number[data-count]');
-    
+
     const observerOptions = {
         threshold: 0.5,
         rootMargin: '0px'
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -180,7 +180,7 @@ function initCounterAnimation() {
             }
         });
     }, observerOptions);
-    
+
     counters.forEach(counter => observer.observe(counter));
 }
 
@@ -188,17 +188,17 @@ function animateCounter(element, target) {
     const duration = 2000;
     const startTime = performance.now();
     const startValue = 0;
-    
+
     function updateCounter(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        
+
         // Easing function (ease-out-expo)
         const easeOutExpo = 1 - Math.pow(2, -10 * progress);
         const currentValue = Math.floor(startValue + (target - startValue) * easeOutExpo);
-        
+
         element.textContent = currentValue;
-        
+
         if (progress < 1) {
             requestAnimationFrame(updateCounter);
         } else {
@@ -211,7 +211,7 @@ function animateCounter(element, target) {
             }
         }
     }
-    
+
     requestAnimationFrame(updateCounter);
 }
 
@@ -220,12 +220,12 @@ function animateCounter(element, target) {
 // ============================================
 function initSkillBars() {
     const skillBars = document.querySelectorAll('.skill-progress');
-    
+
     const observerOptions = {
         threshold: 0.3,
         rootMargin: '0px'
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -234,7 +234,7 @@ function initSkillBars() {
             }
         });
     }, observerOptions);
-    
+
     skillBars.forEach(bar => observer.observe(bar));
 }
 
@@ -245,12 +245,12 @@ function initNavigation() {
     const nav = document.getElementById('main-nav');
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section[id], header[id]');
-    
+
     // Scroll effect para nav
     let lastScroll = 0;
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
-        
+
         if (nav) {
             if (currentScroll > 100) {
                 nav.classList.add('scrolled');
@@ -258,20 +258,20 @@ function initNavigation() {
                 nav.classList.remove('scrolled');
             }
         }
-        
+
         // Actualizar link activo
         updateActiveNav(sections, navLinks);
-        
+
         lastScroll = currentScroll;
     });
-    
+
     // Smooth scroll para links
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('href');
             const targetSection = document.querySelector(targetId);
-            
+
             if (targetSection) {
                 const offsetTop = targetSection.offsetTop - 100;
                 window.scrollTo({
@@ -285,12 +285,12 @@ function initNavigation() {
 
 function updateActiveNav(sections, navLinks) {
     const scrollY = window.scrollY + 150;
-    
+
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;
         const sectionId = section.getAttribute('id');
-        
+
         if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
             navLinks.forEach(link => {
                 link.classList.remove('active');
@@ -308,42 +308,42 @@ function updateActiveNav(sections, navLinks) {
 function initCustomCursor() {
     const cursor = document.querySelector('.cursor');
     const follower = document.querySelector('.cursor-follower');
-    
+
     if (!cursor || !follower) return;
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    
+
     let mouseX = 0, mouseY = 0;
     let cursorX = 0, cursorY = 0;
-    
+
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        
+
         cursor.style.left = mouseX + 'px';
         cursor.style.top = mouseY + 'px';
     });
-    
+
     // Animación suave del follower
     function animateFollower() {
         cursorX += (mouseX - cursorX) * 0.12;
         cursorY += (mouseY - cursorY) * 0.12;
-        
+
         follower.style.left = cursorX + 'px';
         follower.style.top = cursorY + 'px';
-        
+
         requestAnimationFrame(animateFollower);
     }
     animateFollower();
-    
+
     // Efecto hover
     const hoverElements = 'a, button, .btn, .nav-link, .project-card, .skill-icon-card, .social-link, .certificate-card, .cert-card, .contact-item';
-    
+
     document.addEventListener('mouseover', (e) => {
         if (e.target.closest(hoverElements)) {
             follower.classList.add('hover');
         }
     });
-    
+
     document.addEventListener('mouseout', (e) => {
         if (e.target.closest(hoverElements)) {
             follower.classList.remove('hover');
@@ -357,7 +357,7 @@ function initCustomCursor() {
 function initBackToTop() {
     const backToTop = document.getElementById('back-to-top');
     if (!backToTop) return;
-    
+
     window.addEventListener('scroll', () => {
         if (window.scrollY > 500) {
             backToTop.classList.add('visible');
@@ -365,7 +365,7 @@ function initBackToTop() {
             backToTop.classList.remove('visible');
         }
     });
-    
+
     backToTop.addEventListener('click', () => {
         window.scrollTo({
             top: 0,
@@ -380,24 +380,24 @@ function initBackToTop() {
 function setupContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
-    
+
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         const submitBtn = form.querySelector('.form-submit');
         const originalText = submitBtn.innerHTML;
-        
+
         // Estado de carga
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
         submitBtn.disabled = true;
-        
+
         // Obtener datos
         const formData = new FormData(form);
         const name = formData.get('name');
         const email = formData.get('email');
         const subject = formData.get('subject') || 'Contacto desde Portafolio';
         const message = formData.get('message');
-        
+
         // Intentar con EmailJS primero
         try {
             if (typeof emailjs !== 'undefined' && CONFIG.emailjs.publicKey !== 'YOUR_PUBLIC_KEY') {
@@ -407,7 +407,7 @@ function setupContactForm() {
                     subject: subject,
                     message: message
                 });
-                
+
                 showNotification('¡Mensaje enviado correctamente!', 'success');
                 form.reset();
             } else {
@@ -420,7 +420,7 @@ function setupContactForm() {
             console.error('Error enviando mensaje:', error);
             showNotification('Error al enviar. Intenta de nuevo.', 'error');
         }
-        
+
         // Restaurar botón
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
@@ -434,14 +434,14 @@ function showNotification(message, type = 'info') {
     // Remover notificación existente
     const existing = document.querySelector('.notification');
     if (existing) existing.remove();
-    
+
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.innerHTML = `
         <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
         <span>${message}</span>
     `;
-    
+
     // Estilos
     Object.assign(notification.style, {
         position: 'fixed',
@@ -461,14 +461,14 @@ function showNotification(message, type = 'info') {
         zIndex: '10000',
         transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
     });
-    
+
     document.body.appendChild(notification);
-    
+
     // Animar entrada
     requestAnimationFrame(() => {
         notification.style.transform = 'translateX(-50%) translateY(0)';
     });
-    
+
     // Remover después de 4 segundos
     setTimeout(() => {
         notification.style.transform = 'translateX(-50%) translateY(100px)';
@@ -491,12 +491,12 @@ function updateCurrentYear() {
 // ============================================
 function initParallax() {
     const parallaxElements = document.querySelectorAll('[data-parallax]');
-    
+
     if (parallaxElements.length === 0) return;
-    
+
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
-        
+
         parallaxElements.forEach(el => {
             const speed = el.getAttribute('data-parallax') || 0.5;
             const yPos = -(scrolled * speed);
@@ -511,24 +511,24 @@ function initParallax() {
 function initProfileTilt() {
     const card = document.querySelector('.profile-card');
     if (!card) return;
-    
+
     card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        
+
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        
+
         const rotateX = (y - centerY) / 10;
         const rotateY = (centerX - x) / 10;
-        
+
         const inner = card.querySelector('.profile-card-inner');
         if (inner) {
             inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         }
     });
-    
+
     card.addEventListener('mouseleave', () => {
         const inner = card.querySelector('.profile-card-inner');
         if (inner) {
@@ -545,25 +545,59 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================
-// Certificate Modal Functions
+// Certificate Modal Functions - Premium
 // ============================================
-function openCertModal(title, issuer, year, imagePath) {
+function openCertModal(title, issuer, year, imagePath, pdfPath) {
     const modal = document.getElementById('cert-modal');
     const modalTitle = document.getElementById('cert-modal-title');
     const modalIssuer = document.getElementById('cert-modal-issuer');
     const modalYear = document.getElementById('cert-modal-year');
     const modalImage = document.getElementById('cert-modal-image');
-    
-    if (modal && modalTitle && modalIssuer && modalYear && modalImage) {
-        modalTitle.textContent = title;
-        modalIssuer.textContent = issuer;
-        modalYear.textContent = year;
-        modalImage.src = imagePath;
-        modalImage.alt = `Certificado: ${title}`;
-        
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+    const modalBody = document.getElementById('cert-modal-body');
+    const downloadBtn = document.getElementById('cert-modal-download');
+
+    if (!modal) return;
+
+    // Set text content
+    if (modalTitle) modalTitle.textContent = title;
+    if (modalIssuer) modalIssuer.textContent = issuer;
+    if (modalYear) modalYear.textContent = year;
+
+    // Handle PDF vs Image
+    if (pdfPath) {
+        // PDF Certificate: show embed viewer + download button
+        if (modalBody) {
+            modalBody.innerHTML = `
+                <div class="cert-pdf-viewer">
+                    <div class="cert-pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <p class="cert-pdf-title">${title}</p>
+                    <p class="cert-pdf-subtitle">Documento PDF disponible para descarga</p>
+                    <a href="${pdfPath}" target="_blank" class="cert-pdf-open-btn">
+                        <i class="fas fa-external-link-alt"></i>
+                        Abrir PDF en nueva pestaña
+                    </a>
+                </div>
+            `;
+        }
+        if (downloadBtn) {
+            downloadBtn.href = pdfPath;
+            downloadBtn.style.display = 'inline-flex';
+        }
+    } else if (imagePath) {
+        // Image Certificate
+        if (modalBody) {
+            modalBody.innerHTML = `<img id="cert-modal-image" src="${imagePath}" alt="Certificado: ${title}" style="max-width:100%;border-radius:12px;">`;
+        }
+        if (downloadBtn) {
+            downloadBtn.style.display = 'none';
+        }
     }
+
+    // Show modal with animation
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
 
 function closeCertModal() {

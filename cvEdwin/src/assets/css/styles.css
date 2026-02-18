@@ -2577,6 +2577,227 @@ a:hover {
 }
 
 /* ==========================================================================
+   CERTIFICATE CARDS - Premium Redesign
+   ========================================================================== */
+
+/* Count badge in section subtitle */
+.cert-count-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 14px;
+    background: linear-gradient(135deg, rgba(var(--accent-cyan-rgb), 0.15), rgba(168, 85, 247, 0.15));
+    border: 1px solid rgba(var(--accent-cyan-rgb), 0.3);
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    vertical-align: middle;
+}
+
+/* Shimmer shine effect on hover */
+.cert-card-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.05),
+        transparent
+    );
+    transform: skewX(-20deg);
+    transition: left 0.7s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.cert-card:hover .cert-card-shine {
+    left: 150%;
+}
+
+/* Colored icons per technology */
+.cert-icon--aws { background: linear-gradient(135deg, #ff9900, #e67e00) !important; color: white !important; }
+.cert-icon--python { background: linear-gradient(135deg, #3776ab, #ffd43b) !important; color: white !important; }
+.cert-icon--angular { background: linear-gradient(135deg, #dd0031, #c3002f) !important; color: white !important; }
+.cert-icon--js { background: linear-gradient(135deg, #f7df1e, #e6c800) !important; color: #1a1a1a !important; }
+.cert-icon--html { background: linear-gradient(135deg, #e34f26, #f06529) !important; color: white !important; }
+.cert-icon--lang { background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important; color: white !important; }
+.cert-icon--iu { background: linear-gradient(135deg, #a855f7, #7c3aed) !important; color: white !important; }
+
+.cert-icon--aws i,
+.cert-icon--python i,
+.cert-icon--angular i,
+.cert-icon--js i,
+.cert-icon--html i,
+.cert-icon--lang i,
+.cert-icon--iu i {
+    background: none !important;
+    -webkit-text-fill-color: inherit !important;
+    color: inherit !important;
+}
+
+/* PDF card variant */
+.cert-card--pdf .cert-card-preview--pdf {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    color: var(--accent-purple);
+    font-size: 0.85rem;
+    padding: var(--space-lg);
+}
+
+.cert-card--pdf .cert-card-preview--pdf i {
+    font-size: 3rem;
+    color: var(--accent-purple);
+}
+
+.cert-badge--pdf {
+    color: var(--accent-purple) !important;
+}
+
+/* ==========================================================================
+   CERTIFICATE MODAL - Premium Redesign
+   ========================================================================== */
+
+/* Modal header with icon */
+.cert-modal-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    text-align: left;
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.cert-modal-icon {
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(var(--accent-cyan-rgb), 0.2), rgba(168, 85, 247, 0.2));
+    border: 1px solid rgba(var(--accent-cyan-rgb), 0.3);
+    border-radius: var(--radius-lg);
+    font-size: 1.75rem;
+    color: var(--accent-cyan);
+}
+
+.cert-modal-header h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 4px;
+    text-align: left;
+}
+
+.cert-modal-header p {
+    color: var(--accent-cyan);
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    text-align: left;
+}
+
+/* Modal footer with download button */
+.cert-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--glass-border);
+    margin-top: var(--space-lg);
+}
+
+.cert-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-lg);
+    background: linear-gradient(135deg, var(--accent-purple), #7c3aed);
+    color: white;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: var(--transition-normal);
+    text-decoration: none;
+}
+
+.cert-download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
+    color: white;
+}
+
+/* PDF Viewer inside modal */
+.cert-pdf-viewer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-lg);
+    padding: var(--space-3xl) var(--space-xl);
+    text-align: center;
+}
+
+.cert-pdf-icon {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(124, 58, 237, 0.15));
+    border: 2px solid rgba(168, 85, 247, 0.3);
+    border-radius: 50%;
+    font-size: 3rem;
+    color: var(--accent-purple);
+    animation: pdfPulse 2s ease-in-out infinite;
+}
+
+@keyframes pdfPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.3); }
+    50% { box-shadow: 0 0 0 15px rgba(168, 85, 247, 0); }
+}
+
+.cert-pdf-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-white);
+}
+
+.cert-pdf-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.cert-pdf-open-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-xl);
+    background: linear-gradient(135deg, var(--accent-purple), #7c3aed);
+    color: white;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: var(--transition-normal);
+    text-decoration: none;
+}
+
+.cert-pdf-open-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+    color: white;
+}
+
+/* ==========================================================================
    PRINT STYLES
    ========================================================================== */
 @media print {
