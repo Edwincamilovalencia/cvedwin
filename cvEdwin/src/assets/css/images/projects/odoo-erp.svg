@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Proyecto Odoo ERP</title>
+  <desc id="desc">Ilustracion de proyecto de implementacion ERP con Odoo</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#07101d"/>
+      <stop offset="55%" stop-color="#10243a"/>
+      <stop offset="100%" stop-color="#24163f"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <g opacity="0.25">
+    <circle cx="170" cy="130" r="120" fill="#00e5ff"/>
+    <circle cx="1020" cy="600" r="190" fill="#a855f7"/>
+  </g>
+  <g stroke="url(#line)" stroke-width="3" fill="none" opacity="0.8">
+    <rect x="170" y="190" width="270" height="130" rx="18"/>
+    <rect x="470" y="130" width="280" height="130" rx="18"/>
+    <rect x="760" y="240" width="270" height="130" rx="18"/>
+    <path d="M440 255h30m280-55h10m0 0h20m-20 0v35M1030 305h40"/>
+    <path d="M305 320v90h305v-90"/>
+    <path d="M610 410h285v-40"/>
+  </g>
+
+  <g fill="#d8ecff" font-family="Inter, Arial, sans-serif">
+    <text x="120" y="510" font-size="76" font-weight="700">ODOO ERP</text>
+    <text x="120" y="565" font-size="34" opacity="0.88">Implementacion, parametrizacion e integraciones</text>
+  </g>
+</svg>

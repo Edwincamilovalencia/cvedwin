@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Proyecto Portafolio Personal</title>
+  <desc id="desc">Ilustracion de sitio web personal moderno</desc>
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080f1f"/>
+      <stop offset="50%" stop-color="#1a1f40"/>
+      <stop offset="100%" stop-color="#2d1455"/>
+    </linearGradient>
+    <linearGradient id="frame" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="700" fill="url(#bg4)"/>
+  <g opacity="0.28">
+    <circle cx="170" cy="150" r="130" fill="#00e5ff"/>
+    <circle cx="1030" cy="560" r="180" fill="#a855f7"/>
+  </g>
+
+  <g transform="translate(160 105)">
+    <rect width="880" height="430" rx="24" fill="#0c1326" stroke="url(#frame)" stroke-width="3"/>
+    <rect x="0" y="0" width="880" height="58" rx="24" fill="#111d34"/>
+    <circle cx="34" cy="29" r="8" fill="#ef4444"/>
+    <circle cx="60" cy="29" r="8" fill="#f59e0b"/>
+    <circle cx="86" cy="29" r="8" fill="#10b981"/>
+    <rect x="130" y="19" width="260" height="20" rx="10" fill="#1f2d4a"/>
+
+    <rect x="35" y="90" width="370" height="300" rx="16" fill="#101c33"/>
+    <rect x="440" y="90" width="405" height="130" rx="16" fill="#101c33"/>
+    <rect x="440" y="260" width="190" height="130" rx="16" fill="#101c33"/>
+    <rect x="655" y="260" width="190" height="130" rx="16" fill="#101c33"/>
+
+    <text x="70" y="160" fill="#ffffff" font-size="42" font-family="Inter, Arial, sans-serif" font-weight="700">Hola, soy Edwin</text>
+    <rect x="70" y="186" width="220" height="14" rx="7" fill="#00e5ff" opacity="0.8"/>
+    <rect x="70" y="220" width="300" height="12" rx="6" fill="#94a3b8" opacity="0.6"/>
+    <rect x="70" y="245" width="260" height="12" rx="6" fill="#94a3b8" opacity="0.45"/>
+    <rect x="70" y="285" width="170" height="42" rx="21" fill="url(#frame)"/>
+  </g>
+
+  <g fill="#e7eeff" font-family="Inter, Arial, sans-serif">
+    <text x="120" y="598" font-size="72" font-weight="700">PORTAFOLIO WEB</text>
+    <text x="120" y="648" font-size="30" opacity="0.9">Diseño premium, secciones dinamicas y experiencia moderna</text>
+  </g>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Proyecto Dashboard Analitico</title>
+  <desc id="desc">Ilustracion de dashboard con graficas y reportes</desc>
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070f19"/>
+      <stop offset="60%" stop-color="#10253a"/>
+      <stop offset="100%" stop-color="#1b2445"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="700" fill="url(#bg3)"/>
+  <g opacity="0.25">
+    <circle cx="1020" cy="100" r="140" fill="#00e5ff"/>
+    <circle cx="140" cy="580" r="200" fill="#3b82f6"/>
+  </g>
+
+  <g transform="translate(120 130)">
+    <rect width="960" height="390" rx="24" fill="#0b1628" stroke="#1e3a8a" stroke-width="2"/>
+    <rect x="35" y="35" width="210" height="120" rx="14" fill="#12243d"/>
+    <rect x="265" y="35" width="210" height="120" rx="14" fill="#12243d"/>
+    <rect x="495" y="35" width="210" height="120" rx="14" fill="#12243d"/>
+    <rect x="725" y="35" width="200" height="120" rx="14" fill="#12243d"/>
+
+    <rect x="35" y="185" width="560" height="170" rx="14" fill="#101f36"/>
+    <polyline points="70,315 155,260 230,282 315,220 395,245 485,205 560,230" fill="none" stroke="#00e5ff" stroke-width="5"/>
+    <circle cx="155" cy="260" r="6" fill="#00e5ff"/>
+    <circle cx="315" cy="220" r="6" fill="#00e5ff"/>
+    <circle cx="485" cy="205" r="6" fill="#00e5ff"/>
+
+    <rect x="625" y="185" width="300" height="170" rx="14" fill="#101f36"/>
+    <rect x="660" y="305" width="36" height="35" rx="6" fill="#38bdf8"/>
+    <rect x="708" y="285" width="36" height="55" rx="6" fill="#22d3ee"/>
+    <rect x="756" y="245" width="36" height="95" rx="6" fill="#0ea5e9"/>
+    <rect x="804" y="220" width="36" height="120" rx="6" fill="#6366f1"/>
+    <rect x="852" y="260" width="36" height="80" rx="6" fill="#a855f7"/>
+  </g>
+
+  <g fill="#d8ecff" font-family="Inter, Arial, sans-serif">
+    <text x="120" y="585" font-size="70" font-weight="700">DASHBOARD ANALITICO</text>
+    <text x="120" y="634" font-size="30" opacity="0.9">Visualizacion de datos, reportes y metricas en tiempo real</text>
+  </g>
+</svg>

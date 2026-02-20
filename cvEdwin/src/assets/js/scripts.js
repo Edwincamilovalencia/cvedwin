@@ -16,6 +16,7 @@ const CONFIG = {
     components: [
         { id: 'header-container', file: 'components/header.html' },
         { id: 'navigation-container', file: 'components/navegation.html' },
+        { id: 'experience-section', file: 'components/experience.html' },
         { id: 'proyects-container', file: 'components/proyects.html' },
         { id: 'skills-container', file: 'components/Habilities.html' },
         { id: 'education-section', file: 'components/education.html' },
@@ -26,10 +27,10 @@ const CONFIG = {
     typingTexts: [
         'Ingeniero de Sistemas',
         'Desarrollador Odoo ERP',
+        'Automatización con n8n y Retell',
         'Python Backend Developer',
-        'Especialista en IA y Automatización',
-        'Full Stack Developer',
-        'Creador de Chatbots IA'
+        'Integraciones con APIs y Webhooks',
+        'Cloud AWS / Azure'
     ],
     typingSpeed: 100,
     typingDelay: 2000
@@ -552,7 +553,6 @@ function openCertModal(title, issuer, year, imagePath, pdfPath) {
     const modalTitle = document.getElementById('cert-modal-title');
     const modalIssuer = document.getElementById('cert-modal-issuer');
     const modalYear = document.getElementById('cert-modal-year');
-    const modalImage = document.getElementById('cert-modal-image');
     const modalBody = document.getElementById('cert-modal-body');
     const downloadBtn = document.getElementById('cert-modal-download');
 
@@ -565,16 +565,16 @@ function openCertModal(title, issuer, year, imagePath, pdfPath) {
 
     // Handle PDF vs Image
     if (pdfPath) {
-        // PDF Certificate: show embed viewer + download button
+        // PDF Certificate: render inline viewer + download button
         if (modalBody) {
             modalBody.innerHTML = `
                 <div class="cert-pdf-viewer">
-                    <div class="cert-pdf-icon">
-                        <i class="fas fa-file-pdf"></i>
-                    </div>
-                    <p class="cert-pdf-title">${title}</p>
-                    <p class="cert-pdf-subtitle">Documento PDF disponible para descarga</p>
-                    <a href="${pdfPath}" target="_blank" class="cert-pdf-open-btn">
+                    <iframe 
+                        class="cert-pdf-frame"
+                        src="${pdfPath}#toolbar=0&navpanes=0&scrollbar=1"
+                        title="Certificado PDF: ${title}">
+                    </iframe>
+                    <a href="${pdfPath}" target="_blank" rel="noopener noreferrer" class="cert-pdf-open-btn">
                         <i class="fas fa-external-link-alt"></i>
                         Abrir PDF en nueva pestaña
                     </a>
@@ -591,6 +591,7 @@ function openCertModal(title, issuer, year, imagePath, pdfPath) {
             modalBody.innerHTML = `<img id="cert-modal-image" src="${imagePath}" alt="Certificado: ${title}" style="max-width:100%;border-radius:12px;">`;
         }
         if (downloadBtn) {
+            downloadBtn.href = '#';
             downloadBtn.style.display = 'none';
         }
     }
@@ -627,4 +628,3 @@ window.portfolioApp = {
 // Expose modal functions globally
 window.openCertModal = openCertModal;
 window.closeCertModal = closeCertModal;
-

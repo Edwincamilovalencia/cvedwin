@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Proyecto de Automatizacion</title>
+  <desc id="desc">Ilustracion de automatizacion con APIs, n8n y asistentes inteligentes</desc>
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06141b"/>
+      <stop offset="55%" stop-color="#0f2d30"/>
+      <stop offset="100%" stop-color="#1f1a3f"/>
+    </linearGradient>
+    <linearGradient id="pulse" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="700" fill="url(#bg2)"/>
+  <g opacity="0.35">
+    <circle cx="970" cy="150" r="160" fill="#00e5ff"/>
+    <circle cx="150" cy="620" r="220" fill="#7c3aed"/>
+  </g>
+
+  <g stroke="#67f0ff" stroke-width="2.5" fill="none" opacity="0.9">
+    <circle cx="600" cy="300" r="95"/>
+    <circle cx="600" cy="300" r="150" opacity="0.7"/>
+    <circle cx="600" cy="300" r="205" opacity="0.4"/>
+    <circle cx="420" cy="210" r="18" fill="#00e5ff"/>
+    <circle cx="780" cy="255" r="18" fill="#22d3ee"/>
+    <circle cx="710" cy="470" r="18" fill="#a855f7"/>
+    <circle cx="470" cy="450" r="18" fill="#38bdf8"/>
+    <path d="M438 220 568 275M762 262 632 292M694 454 625 353M488 438 568 338"/>
+  </g>
+
+  <rect x="510" y="220" width="180" height="160" rx="22" fill="#0f172a" stroke="url(#pulse)" stroke-width="4"/>
+  <g fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-size="28">
+    <text x="540" y="275">if</text>
+    <text x="540" y="315">API -> n8n</text>
+    <text x="540" y="355">then action</text>
+  </g>
+
+  <g fill="#d8ecff" font-family="Inter, Arial, sans-serif">
+    <text x="120" y="550" font-size="74" font-weight="700">AUTOMATIZACION IA</text>
+    <text x="120" y="602" font-size="32" opacity="0.9">Flujos con n8n, Retell, Webhooks y APIs REST</text>
+  </g>
+</svg>
